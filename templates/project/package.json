@@ -1,0 +1,23 @@
+{
+  "name": "presentation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "HTML presentation (precision-presentation scaffold; plain HTML/CSS/JS, no build step)",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "playwright test",
+    "notes": "node scripts/build-notes.mjs",
+    "qa:shots": "node scripts/qa-shots.mjs",
+    "qa:motion": "node scripts/qa-motion.mjs",
+    "qa:media": "node scripts/qa-media.mjs",
+    "export:pdf": "node scripts/export-pdf.mjs",
+    "build": "node scripts/build.mjs",
+    "verify": "node scripts/verify-dist.mjs",
+    "package": "node scripts/package.mjs",
+    "release": "node scripts/build-notes.mjs && node scripts/export-pdf.mjs && node scripts/build.mjs && node scripts/verify-dist.mjs release && node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

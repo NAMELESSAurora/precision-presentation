@@ -1,0 +1,5 @@
+node_modules/
+qa/test-artifacts/
+qa/test-results.json
+dist/
+release/

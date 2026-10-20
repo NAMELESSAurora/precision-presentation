@@ -1,0 +1,25 @@
+# Project brief (P0). Fill from the user's materials; never invent. Unconfirmed values go to assumptions.
+project_title: ""
+mode: "live"                     # live | self_running | hybrid
+approval_mode: "autonomous"      # autonomous (choices recorded as self_selected) | checkpoint
+language: "en (on screen) / zh-CN (speaker notes)"
+audience: ""
+assignment_question: >
+  (paste the exact prompt / brief here; it is read aloud on the question slide)
+one_sentence_thesis: >
+  (from the materials, not invented)
+duration_seconds: null           # unknown = estimate only; never claim it meets the time limit
+aspect_ratio: "16:9"
+reference_canvas: { width: 1920, height: 1080 }
+primary_output: "html"
+secondary_outputs: ["submission PDF (static)", "show package zip", "speaker notes", "presenter view", "run of show"]
+source_documents: []             # path + what each is for: fact source / style reference / usable asset
+visual_references: []            # user's style wishes, quoted
+required_assets: []              # A01 … with status: supplied / to be supplied / degraded to …
+requirements:
+  must: []
+  should: []
+  optional: []
+  forbidden: []
+constraints: []
+assumptions: []

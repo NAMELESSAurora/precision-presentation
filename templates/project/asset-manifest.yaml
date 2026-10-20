@@ -1,0 +1,25 @@
+# Asset manifest. status: in-use | slot-empty (code ready, file not supplied) | unused (kept, restorable) | rejected | failed
+# Every asset: where it came from (URL / file / frame time), what was done to it, what the screen calls it.
+- id: OPEN
+  use: "S01 opening video"
+  path: assets/media/<file>.mp4
+  source: ""
+  status: slot-empty
+  licence_status: ""
+  on_screen_label: ""
+  fallback: "poster + spoken opening; ?OPEN=none simulates a missing file"
+  notes: "H.264 + AAC, faststart, no timecode (tmcd) track: ffmpeg -map 0:v:0 -map 0:a:0 -c copy -write_tmcd 0 -movflags +faststart"
+
+- id: PLATE
+  use: "S03 close-reading image"
+  path: assets/img/<file>.jpg
+  source: ""
+  status: slot-empty
+  on_screen_label: "MADE HERE · … / FACT · source [Rxx]"
+  crop_notes: "call-out anchors in the window's own coordinates"
+
+- id: FONT-1
+  family: "Newsreader + DM Mono"
+  files: assets/fonts/
+  licence: "SIL OFL 1.1 (licence files alongside)"
+  status: in-use

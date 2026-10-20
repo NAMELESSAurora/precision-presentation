@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Presenter</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="src/styles/fonts.css">
+<link rel="stylesheet" href="src/styles/tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  :root { --rule: color-mix(in srgb, var(--night-meta) 28%, transparent); --rule-2: color-mix(in srgb, var(--night-meta) 55%, transparent); }
+  html, body { margin: 0; height: 100%; background: var(--letterbox); color: var(--night-text); font: 400 15px/1.5 var(--mono); }
+  body { display: grid; grid-template-rows: auto 1fr auto; height: 100vh; }
+  header { display: flex; gap: 24px; align-items: center; padding: 10px 18px; border-bottom: 1px solid var(--rule); }
+  header .clock { font-size: 34px; letter-spacing: .02em; color: #fff; min-width: 120px; }
+  header .pace { color: var(--night-meta); }
+  header .pace b { font-weight: 500; }
+  header .ahead { color: #8FD3A8; } header .behind { color: var(--night-accent-text); }
+  header .conn { margin-left: auto; color: var(--night-meta); }
+  header .conn.off { color: var(--night-accent-text); }
+  main { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(360px, 1fr); gap: 18px; padding: 16px 18px; min-height: 0; }
+  .views { --h: calc((100vh - 250px) / 1.58); display: grid; grid-template-rows: auto auto; gap: 12px; align-content: start; min-height: 0; }
+  .views > .cur { width: min(100%, calc(var(--h) * 16 / 9)); }
+  .views > .nxt { width: min(60%, calc(var(--h) * .58 * 16 / 9)); }
+  .frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--rule); }
+  .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .cap { display: flex; justify-content: space-between; color: var(--night-meta); margin: 4px 0 0; }
+  .notes { overflow: auto; min-height: 0; padding-right: 6px; font-family: var(--cjk); }
+  .notes h1 { font: 400 26px/1.2 var(--serif); margin: 0 0 6px; color: #fff; }
+  .notes .goal { color: var(--night-meta); margin: 0 0 14px; font-size: 16px; }
+  .notes ol { padding: 0; margin: 0; list-style: none; counter-reset: c; }
+  .notes li { padding: 10px 12px; margin-bottom: 6px; border-left: 3px solid var(--rule); font-size: 19px; line-height: 1.55; color: var(--night-meta); }
+  .notes li::before { counter-increment: c; content: 'Step ' counter(c) ' '; font: 400 12px/1 var(--mono); color: var(--rule-2); display: block; margin-bottom: 4px; }
+  .notes li.now { border-left-color: var(--night-accent); background: var(--night-surface); color: #fff; }
+  .notes li.done { opacity: .55; }
+  .notes .meta { margin-top: 14px; font-size: 15px; color: var(--night-meta); line-height: 1.6; }
+  .notes .meta b { color: var(--night-text); font-weight: 500; }
+  .notes .bridge { margin-top: 14px; padding: 10px 12px; border: 1px solid var(--rule-2); font: italic 400 20px/1.35 var(--serif); color: #fff; }
+  footer { display: flex; gap: 8px; align-items: center; padding: 10px 18px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  button { font: inherit; color: inherit; background: var(--night-surface); border: 1px solid var(--rule-2); padding: 8px 14px; cursor: pointer; }
+  button:hover { border-color: var(--night-accent); }
+  .list { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+  .list button { padding: 6px 8px; font-size: 13px; }
+  .list button.cur { border-color: var(--night-accent); color: #fff; }
+  .list button.opt { border-style: dashed; }
+  .hint { color: var(--rule-2); }
+</style>
+</head>
+<body>
+<header>
+  <div class="clock" id="clock">00:00</div>
+  <button id="tstart" type="button">Start timer (T)</button>
+  <button id="treset" type="button">Reset (R)</button>
+  <div class="pace" id="pace">Target – · this slide –</div>
+  <div class="conn off" id="conn">Not connected — open from the deck with S</div>
+</header>
+<main>
+  <section class="views">
+    <div class="cur">
+      <div class="frame"><iframe id="curf" title="Current" src="index.html?embed=1" tabindex="-1"></iframe></div>
+      <div class="cap"><span id="curcap">Current</span><span id="stepcap"></span></div>
+    </div>
+    <div class="nxt">
+      <div class="frame"><iframe id="nextf" title="Next" src="index.html?embed=1" tabindex="-1"></iframe></div>
+      <div class="cap"><span id="nextcap">Next</span></div>
+    </div>
+  </section>
+  <section class="notes" id="notes"></section>
+</main>
+<footer>
+  <button data-cmd="prev" type="button">‹ Prev</button>
+  <button data-cmd="next" type="button">Next ›</button>
+  <button data-cmd="blackout" type="button">Black (B)</button>
+  <button data-media="play" type="button">Media play/pause (K)</button>
+  <span class="hint">Keys here also drive the audience window. Dashed = optional on the short path.</span>
+  <div class="list" id="list"></div>
+</footer>
+<script src="src/js/content.js"></script>
+<script src="src/js/notes.js"></script>
+<script src="src/js/presenter.js"></script>
+</body>
+</html>

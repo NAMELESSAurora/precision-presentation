@@ -1,0 +1,25 @@
+# Storyboard (P1). On-screen text is the content baseline; steps = one speaker click each (step 0 = on entry).
+# pace: pulse | explain | pause | climax
+argument_summary: >
+  (≤ 200 words: the whole argument in plain text; it must hold without any picture)
+
+short_path:            # for a tight time slot; skipped slides stay reachable
+  keep: []
+  skip: []
+  bridges: {}          # e.g. S02_to_S04: "one sentence that closes the gap"
+
+slides:
+  - id: S01
+    title: ""
+    function: opening
+    seconds: 45
+    pace: climax
+    takeaway: ""
+    audience_question: ""
+    on_screen: []
+    steps: ["on entry: …", "click 1: …"]
+    visual_action: "where the eye goes first, then next, then what relation it sees"
+    speaker_bridge_out: ""
+    assets: []
+    sources: []
+    boundaries: ["what must not be claimed here"]

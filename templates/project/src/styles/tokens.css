@@ -1,0 +1,47 @@
+/* Design tokens — the single source of truth for colour, type, grid and timing (design/design-system.md).
+ * Logical canvas 1920×1080. Two "worlds" with role tokens: night (immersion: opening, media, conclusion) and day
+ * (examining: argument pages). Components never use hex values: they read --c-* (deck.css), which the world sets.
+ * Alternative palettes: add a :root[data-palette="name"] block and open index.html?palette=name.
+ * Replace these values with the project's chosen direction (P2/P3); keep the role names. */
+:root {
+  --night-bg: #14121F;
+  --night-wash: radial-gradient(1600px 700px at 50% 120%, rgba(120, 140, 255, .16), transparent 70%);
+  --night-text: #F3F1FA;
+  --night-meta: #ADA8C6;
+  --night-em: #9FB4FF;
+  --night-line: #F3F1FA;
+  --night-accent: #6E8BFF;
+  --night-accent-text: #A9BBFF;
+  --night-surface: #232036;
+  --night-glow: none;
+
+  --day-bg: #F4F1EA;
+  --day-wash: linear-gradient(180deg, #F5F2EB 0%, #F1EDE6 100%);
+  --day-text: #1E1C2B;
+  --day-meta: #5E5A70;
+  --day-em: #3D4FA8;
+  --day-line: #1E1C2B;
+  --day-accent: #C2410C;
+  --day-accent-text: #A3360A;
+  --day-surface: #E7E2D8;
+  --day-glow: none;
+
+  --letterbox: #0B0A12;
+
+  /* Two families at most. Bundled OFL fonts (fonts.css); system fallbacks; CJK fallback for Chinese text. */
+  --serif: 'Newsreader', 'Iowan Old Style', Georgia, 'Noto Serif SC', 'Source Han Serif SC', serif;
+  --mono: 'DM Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --cjk: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif;
+
+  --margin: 96px;
+  --gutter: 24px;
+  --title-y: 112px;
+
+  --fs-cover: 168px;
+  --fs-title: 92px;
+  --fs-statement: 100px;
+  --fs-sub: 60px;
+  --fs-body: 46px;
+  --fs-small: 34px;
+  --fs-label: 22px;
+}

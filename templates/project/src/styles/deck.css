@@ -1,0 +1,138 @@
+/* Layout, type and components on the 1920×1080 stage. Colours only via --c-* (the world decides the values). */
+
+/* ───────── Colour context ───────── */
+#stage, .slide {
+  --c-bg: var(--day-bg); --c-wash: var(--day-wash); --c-text: var(--day-text); --c-meta: var(--day-meta); --c-em: var(--day-em);
+  --c-line: var(--day-line); --c-accent: var(--day-accent); --c-accent-text: var(--day-accent-text); --c-surface: var(--day-surface); --c-glow: var(--day-glow);
+}
+#stage[data-theme="night"], .slide[data-theme="night"] {
+  --c-bg: var(--night-bg); --c-wash: var(--night-wash); --c-text: var(--night-text); --c-meta: var(--night-meta); --c-em: var(--night-em);
+  --c-line: var(--night-line); --c-accent: var(--night-accent); --c-accent-text: var(--night-accent-text); --c-surface: var(--night-surface); --c-glow: var(--night-glow);
+}
+
+/* ───────── Runtime frame ───────── */
+html, body { margin: 0; height: 100%; background: var(--letterbox); overflow: hidden; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+#stage {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0;
+  background: var(--c-wash), var(--c-bg); color: var(--c-text); overflow: hidden; contain: layout paint;
+}
+/* No background-colour transition on purpose: themes change by flood (motion.js), never by interpolation. */
+body:not(.is-ready) #stage { visibility: hidden; }
+.slide { position: absolute; inset: 0; visibility: hidden; font-family: var(--serif); font-optical-sizing: auto; color: var(--c-text); }
+.slide.is-active, .slide.is-leaving { visibility: visible; }
+.slide.is-leaving { pointer-events: none; z-index: 0; }
+.slide.is-active { z-index: 2; }
+#flood { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+#flood[data-to="day"] { background: var(--day-wash), var(--day-bg); }
+#flood[data-to="night"] { background: var(--night-wash), var(--night-bg); }
+/* Step state: hidden until revealed; layout is reserved (visibility), so nothing jumps. */
+.slide [data-reveal]:not(.on) { opacity: 0; visibility: hidden; }
+
+/* ───────── Progress line + running head ───────── */
+#progress { position: absolute; left: var(--margin); right: var(--margin); bottom: 64px; height: 2px; background: var(--c-line); opacity: .3;
+  transform-origin: 0 0; transform: scaleX(0); transition: transform 500ms cubic-bezier(.16, 1, .3, 1); z-index: 3; pointer-events: none; }
+.head { position: absolute; left: var(--margin); right: var(--margin); top: 40px; display: flex; justify-content: space-between; }
+.label, .head { font-family: var(--mono); font-size: var(--fs-label); line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; color: var(--c-meta); font-weight: 400; }
+/* While a video is on screen, everything that could cover it steps back. */
+#stage.media-live #progress, #stage.media-live .slide.is-active > .head,
+#stage.media-live .slide.is-active .over-media { opacity: 0; transition: opacity 400ms; }
+#stage.media-live .mbar { opacity: 0; transition: opacity 300ms; }
+#stage.media-live .credits:hover .mbar { opacity: 1; }
+
+/* ───────── Shared type ───────── */
+.title { position: absolute; left: var(--margin); top: var(--title-y); margin: 0; font-size: var(--fs-title); line-height: 1.02; font-weight: 380; letter-spacing: -.015em; }
+.title .line, .statement .line, h1 .line { display: block; width: max-content; }
+.title em, .em2 { font-style: italic; font-weight: 330; color: var(--c-em); text-shadow: var(--c-glow); }
+p { margin: 0; }
+.work { font-style: italic; }
+.foot { position: absolute; left: var(--margin); right: var(--margin); top: 940px; display: flex; justify-content: space-between; gap: 48px; }
+[lang|="zh"] { font-family: var(--cjk); }
+
+/* Provenance tags: glyph + word, never colour alone. fact / reading (ours) / packaging / made here. */
+.tag { display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; }
+.tag > i { flex: none; width: 13px; height: 13px; display: inline-block; }
+.tag-fact > i { background: currentColor; border-radius: 50%; }
+.tag-read > i { border: 2px solid currentColor; border-radius: 50%; }
+.tag-pack > i { border: 2px solid currentColor; background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+.tag-made > i { background: var(--c-accent); }
+
+/* ───────── Media block (video with poster, controls) ───────── */
+.media, .media > img, .media > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.media > video { opacity: 0; background: var(--night-bg); transition: opacity 600ms; }
+.media.has-video.started > video { opacity: 1; }
+.credits { position: absolute; left: var(--margin); right: var(--margin); bottom: 88px; display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; transition: opacity 300ms; }
+.mbar { display: flex; gap: 12px; align-items: center; }
+.media.has-video ~ .credits .mbar { background: color-mix(in srgb, var(--night-bg) 86%, transparent); padding: 10px 12px; }
+.mtime, .mstatus { font: 400 var(--fs-label)/1.2 var(--mono); letter-spacing: .06em; color: var(--c-meta); white-space: nowrap; }
+.mstatus { text-transform: uppercase; }
+
+/* ───────── Image-viewer window (a picture framed as a file opened today) ───────── */
+.window { position: absolute; outline: 1.5px solid var(--c-line); box-shadow: 10px 10px 0 color-mix(in srgb, var(--c-line) 85%, transparent); background: var(--c-surface); }
+.window > img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.window > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.winbar { position: absolute; left: -1.5px; right: -1.5px; top: -40px; height: 40px; display: flex; align-items: center; gap: 12px; padding: 0 12px;
+  background: var(--c-surface); border: 1.5px solid var(--c-line); border-bottom-width: 0; font: 400 18px/1 var(--mono); letter-spacing: .04em; white-space: nowrap; }
+.winbar .ico { width: 14px; height: 14px; background: var(--c-accent); flex: none; }
+.winbar .fn { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.callout { position: absolute; font: 400 var(--fs-label)/1 var(--mono); letter-spacing: .04em; background: var(--day-bg); color: var(--day-text);
+  padding: 8px 12px 7px; white-space: nowrap; border: 1.5px solid var(--day-text); box-shadow: 3px 3px 0 color-mix(in srgb, var(--day-text) 70%, transparent); }
+.ln-ink path { fill: none; stroke: var(--day-text); stroke-width: 2; }
+.ln-halo path { fill: none; stroke: var(--day-bg); stroke-width: 6; }
+.ring-ink circle { fill: var(--day-bg); stroke: var(--day-text); stroke-width: 2.5; }
+
+/* ───────── SVG primitives ───────── */
+.ln { fill: none; stroke: var(--c-line); stroke-width: 2; opacity: .55; }
+.ln-strong { opacity: 1; }
+.ln-acc { stroke: var(--c-accent); stroke-width: 3; opacity: 1; }
+.dot-acc { fill: var(--c-accent); }
+
+/* ───────── Buttons ───────── */
+.btn { font: 400 var(--fs-label)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: inherit; background: transparent;
+  border: 1.5px solid currentColor; padding: 14px 20px 13px; display: inline-flex; align-items: center; gap: 14px; cursor: pointer; white-space: nowrap;
+  box-shadow: 3px 3px 0 currentColor; }
+.btn:active { translate: 2px 2px; box-shadow: 1px 1px 0 currentColor; }
+.btn:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 3px; }
+.btn[disabled] { opacity: .45; cursor: default; }
+.btn svg { width: 16px; height: 16px; flex: none; }
+
+/* ───────── References ───────── */
+.reflist { position: absolute; left: var(--margin); top: 300px; width: 1728px; margin: 0; padding: 0; list-style: none; }
+.reflist li { padding-left: 56px; text-indent: -56px; font-size: 32px; line-height: 1.32; margin-bottom: 28px; }
+.reflist a { color: var(--c-em); text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+
+/* ───────── HUD (help, overview, toast, blackout) ───────── */
+#blackout { position: fixed; inset: 0; background: #000; z-index: 50; display: none; }
+.blackout #blackout { display: block; }
+.hud { position: fixed; z-index: 40; font: 400 15px/1.5 var(--mono); color: var(--night-text); }
+#toast { left: 50%; bottom: 28px; transform: translateX(-50%); background: color-mix(in srgb, var(--night-bg) 92%, transparent); padding: 10px 16px;
+  border: 1px solid var(--night-meta); opacity: 0; transition: opacity 200ms; pointer-events: none; }
+#toast.show { opacity: 1; }
+.overlay { position: fixed; inset: 0; z-index: 45; background: color-mix(in srgb, var(--night-bg) 95%, transparent); color: var(--night-text);
+  display: none; overflow: auto; padding: 48px; font: 400 16px/1.5 var(--mono); }
+.overlay.open { display: block; }
+.overlay h2 { font: 400 28px/1.2 var(--serif); margin: 0 0 24px; }
+.overlay table { border-collapse: collapse; }
+.overlay td { padding: 4px 24px 4px 0; vertical-align: top; }
+.overlay kbd { border: 1px solid var(--night-meta); padding: 1px 6px; }
+#overview .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+#overview button { text-align: left; font: inherit; color: inherit; background: var(--night-surface); border: 1px solid color-mix(in srgb, var(--night-meta) 50%, transparent); padding: 14px; cursor: pointer; }
+#overview button.current { border-color: var(--night-accent); }
+#overview button b { display: block; font: 400 20px/1.25 var(--serif); margin-top: 6px; }
+
+/* ───────── Static / reading mode + print (PDF) ───────── */
+html:has(body.mode-static), .mode-static { overflow: auto; height: auto; }
+.mode-static #stage { position: relative; height: auto; overflow: visible; background: none !important; contain: none; }
+.mode-static .slide { position: relative; visibility: visible; height: 1080px; overflow: hidden; margin-bottom: 24px; background: var(--c-wash), var(--c-bg); }
+.mode-static .slide [data-reveal] { opacity: 1 !important; visibility: visible !important; }
+.mode-static #progress, .mode-static .live-only { display: none !important; }
+.static-only { display: none; }
+.mode-static .static-only { display: block; }
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+  html, body { background: none; }
+  .mode-static .slide { margin: 0; break-after: page; }
+  .hud, .overlay { display: none !important; }
+}

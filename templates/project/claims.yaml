@@ -1,0 +1,11 @@
+# Every checkable statement that appears ON SCREEN (and every fact the speech script may use).
+# type: fact | packaging-language | reading (our interpretation, labelled READING on screen) | method-note
+# status: verified (re-opened, date in sources.md) | handoff-verified (taken from a ledger, not re-opened) | analytic (ours)
+# When content is replaced, keep the old entry with slides: [] and a note — do not delete history.
+- id: C01
+  text: ""
+  type: fact
+  source: "R01 (exact location: page / section / quoted phrase)"
+  status: verified
+  scope_note: ""
+  slides: []

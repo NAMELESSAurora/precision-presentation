@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presentation Title</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="src/styles/fonts.css">
+<link rel="stylesheet" href="src/styles/tokens.css">
+<link rel="stylesheet" href="src/styles/deck.css">
+<link rel="stylesheet" href="src/styles/slides.css">
+</head>
+<body>
+<!-- precision-presentation scaffold. Each slide type below is an example to adapt, not a layout to keep.
+     Markup contract: see src/js/deck.js header and the skill's reference/02_runtime.md. -->
+<div id="viewport">
+<main id="stage" data-theme="night" aria-live="polite">
+  <div id="flood" aria-hidden="true" hidden></div>
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- S01 · Opening: media with poster; the title arrives after the video -->
+  <section class="slide" id="S01" data-theme="night" data-label="Opening" aria-label="Presentation Title">
+    <div class="media" data-media="OPEN">
+      <img class="poster" src="assets/img/sample-poster.jpg" alt="Poster frame of the opening video">
+      <video preload="none" playsinline></video>
+    </div>
+    <div class="cover over-media">
+      <h1><span class="line" data-reveal="1">Presentation</span><span class="line" data-reveal="1"><em>Title</em></span></h1>
+      <div class="sub" data-reveal="1" data-anim="rise">A subtitle that states the question</div>
+    </div>
+    <div class="credits">
+      <div class="credit-text over-media">
+        <div class="label">Opening video · maker / source credit</div>
+        <div class="song">Artist — <span class="work">Work Title</span></div>
+      </div>
+      <div class="mbar live-only">
+        <button class="btn" data-act="play" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v13L14 8z" fill="currentColor"/></svg><span>Play</span></button>
+        <button class="btn" data-act="restart" type="button">Restart</button>
+        <button class="btn" data-act="mute" type="button">Mute</button>
+        <button class="btn" data-act="skip" type="button">Skip ›</button>
+        <span class="mtime">0:00</span>
+        <span class="mstatus">Still only · video not supplied</span>
+      </div>
+      <div class="static-only label">Media: opening video, shown live only</div>
+    </div>
+  </section>
+
+  <!-- S02 · Claim: two blocks meeting on one line -->
+  <section class="slide" id="S02" data-label="Question &amp; claim">
+    <h2 class="title"><span class="line">What is the question?</span></h2>
+    <div class="pair" style="left:96px" data-reveal="1"><div class="label" data-type-on>Part one</div><h3>First idea</h3><p>what it does.</p></div>
+    <div class="pair" style="left:1056px" data-reveal="2"><div class="label" data-type-on>Part two</div><h3>Second idea</h3><p>what it points to.</p></div>
+    <svg class="lines" viewBox="0 0 1920 1080" aria-hidden="true">
+      <path class="ln" data-reveal="1" data-anim="draw" d="M96 760 H864"/>
+      <path class="ln" data-reveal="2" data-anim="draw" d="M1824 760 H1056"/>
+      <path class="ln ln-acc" data-reveal="3" data-anim="draw" d="M864 760 H1056"/>
+      <circle class="dot-acc" data-reveal="3" data-delay="280" cx="960" cy="760" r="10"/>
+    </svg>
+    <p class="meet" data-reveal="3" data-anim="rise" data-delay="320">These are not mutually exclusive.</p>
+    <div class="foot label"><span class="tag tag-read"><i></i>Our working distinction — not a quotation</span></div>
+  </section>
+
+  <!-- S03 · Close reading: an image in a viewer window, call-outs per step, three questions -->
+  <section class="slide" id="S03" data-label="Close reading">
+    <h2 class="title"><span class="line">The feeling is real.</span><span class="line"><em>The image is selective.</em></span></h2>
+    <figure class="window plate" data-slot-box="PLATE" data-reveal="0" style="margin:0">
+      <div class="winbar" aria-hidden="true"><i class="ico"></i><span class="fn" data-type-on data-fn-of="#S03 .plate > img"></span></div>
+      <img data-slot="PLATE" data-load alt="Describe the image and its origin">
+      <svg viewBox="0 0 1056 594" aria-hidden="true">
+        <g class="ln-halo"><path data-reveal="2" data-anim="draw" d="M300 200 V120"/><path data-reveal="2" data-anim="draw" data-delay="120" d="M700 380 H800"/></g>
+        <g class="ln-ink"><path data-reveal="2" data-anim="draw" d="M300 200 V120"/><path data-reveal="2" data-anim="draw" data-delay="120" d="M700 380 H800"/></g>
+        <g class="ring-ink"><circle data-reveal="2" cx="300" cy="210" r="10"/><circle data-reveal="2" data-delay="120" cx="690" cy="380" r="10"/></g>
+      </svg>
+      <div class="callout" style="left:200px;top:84px" data-reveal="2" data-delay="80">a fact about the image</div>
+      <div class="callout" style="left:800px;top:362px" data-reveal="2" data-delay="200">another fact</div>
+    </figure>
+    <div class="caption label" data-slot-box="PLATE"><span class="tag tag-made"><i></i>Made here · say what the image is and when it was made</span></div>
+    <p class="plate-missing" data-slot-fallback="PLATE">Image not supplied yet — content.js → slots.PLATE</p>
+    <div class="qs">
+      <div class="q" data-reveal="1"><div class="label">01 · Sound</div><p>What do I hear?</p></div>
+      <div class="q" data-reveal="2"><div class="label">02 · Image</div><p>What is shown?</p></div>
+      <div class="q" data-reveal="3"><div class="label">03 · Context</div><p>What am I invited to imagine?</p></div>
+    </div>
+  </section>
+
+  <!-- S04 · Relation: one entry splitting into two equal branches (optional on the short path) -->
+  <section class="slide" id="S04" data-label="Reading · Author (Year)">
+    <h2 class="title"><span class="line">Does it help us</span><span class="line"><em>return to the present?</em></span></h2>
+    <div class="entry label">Entry · the same experience</div>
+    <svg class="branches" viewBox="0 0 1920 1080" aria-hidden="true">
+      <path class="ln ln-strong" d="M96 640 H720"/>
+      <path class="ln ln-strong" data-reveal="1" data-anim="draw" d="M720 640 C840 640 870 520 1000 520 H1824"/>
+      <path class="ln ln-strong" data-reveal="2" data-anim="draw" d="M720 640 C840 640 870 760 1000 760 H1824"/>
+    </svg>
+    <p class="use" style="top:448px" data-reveal="1" data-anim="rise" data-delay="260">Reading A</p>
+    <p class="use" style="top:688px" data-reveal="2" data-anim="rise" data-delay="260">Reading B</p>
+    <div class="meter-row" data-reveal="3"><div class="label">Evidence strength (illustrative)</div><div class="meter" data-anim="meter"></div></div>
+    <div class="foot label" data-reveal="3" data-anim="fade"><span class="tag tag-fact"><i></i>Author et al. (Year) [R02] · cross-sectional: association, not causation</span></div>
+  </section>
+
+  <!-- S05 · Conclusion (night): the opening still returns, framed; optional first-person line -->
+  <section class="slide" id="S05" data-theme="night" data-label="Conclusion">
+    <h2 class="statement"><span class="line">The answer,</span><span class="line"><em>in one sentence.</em></span></h2>
+    <div class="frame window"><img src="assets/img/sample-poster.jpg" alt="The opening still, framed"></div>
+    <div class="asks">
+      <div class="ask" data-reveal="1"><span class="label">01</span>What am I feeling?</div>
+      <div class="ask" data-reveal="2"><span class="label">02</span>What has been selected?</div>
+      <div class="ask" data-reveal="3"><span class="label">03</span>What do I make of it now?</div>
+    </div>
+    <p class="personal" data-reveal="4" data-text="personal" data-format="“{}”"></p>
+    <div class="discuss" data-reveal="5"><div class="label">Discussion</div><p>An open question for the room?</p></div>
+  </section>
+
+  <!-- S06 · References (not counted, not read aloud) -->
+  <section class="slide refs" id="S06" data-ref data-label="References">
+    <h2 class="title"><span class="line">References</span></h2>
+    <ol class="reflist">
+      <li>Author, A. (Year). Title of the work. <i>Journal, 1</i>(2), 3–4. <a href="https://doi.org/10.0000/example">https://doi.org/10.0000/example</a></li>
+    </ol>
+    <div class="credit-line label"><span class="tag tag-made"><i></i><span data-text="maker" data-format="Opening video: made by {} for this presentation.">Opening video: maker credit to be added.</span></span></div>
+  </section>
+</main>
+</div>
+
+<div id="blackout" aria-hidden="true"></div>
+<div id="toast" class="hud" role="status"></div>
+<div id="help" class="overlay" role="dialog" aria-label="Keyboard help">
+  <h2>Keys</h2>
+  <table>
+    <tr><td><kbd>→</kbd> <kbd>Space</kbd> <kbd>PgDn</kbd> click</td><td>Next step (finishes a running animation first; a playing video stops only on a second press)</td></tr>
+    <tr><td><kbd>←</kbd> <kbd>PgUp</kbd> right-click</td><td>Previous step (instant)</td></tr>
+    <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>First / last slide</td></tr>
+    <tr><td>number + <kbd>Enter</kbd></td><td>Jump to slide</td></tr>
+    <tr><td><kbd>G</kbd></td><td>Slide overview</td></tr>
+    <tr><td><kbd>K</kbd> / <kbd>J</kbd> / <kbd>L</kbd> / <kbd>M</kbd></td><td>Media: play-pause / restart / skip / mute</td></tr>
+    <tr><td><kbd>S</kbd></td><td>Presenter window (notes, timer, next)</td></tr>
+    <tr><td><kbd>F</kbd></td><td>Fullscreen</td></tr>
+    <tr><td><kbd>B</kbd> or <kbd>.</kbd></td><td>Black screen</td></tr>
+    <tr><td><kbd>A</kbd></td><td>Reduce animations (this session only)</td></tr>
+    <tr><td><kbd>?</kbd> / <kbd>Esc</kbd></td><td>This help / close</td></tr>
+  </table>
+  <p>Reading version: add <code>?mode=static</code> to the address.</p>
+</div>
+<div id="overview" class="overlay" role="dialog" aria-label="Slide overview"><h2>Slides</h2><div class="grid"></div></div>
+
+<script src="src/js/content.js"></script>
+<script src="src/js/motion.js"></script>
+<script src="src/js/deck.js"></script>
+</body>
+</html>

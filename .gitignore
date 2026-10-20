@@ -1,0 +1,12 @@
+# 项目运行时产物（脚手架复制到项目目录后使用）
+node_modules/
+dist/
+release/
+
+# QA 产物
+qa/test-artifacts/
+qa/test-results.json
+
+# 系统文件
+.DS_Store
+Thumbs.db
