@@ -34,7 +34,18 @@
 - 脚手架已经提供运行时、媒体、演讲者窗口和静态模式。原型要验证的是**本项目的页型**：最复杂的那页、需要多步关系演示的那页、媒体页。
 - 必测项：前进、后退、快速连按、重进同一页、从中途跳入、刷新恢复、媒体失败、静态模式。脚手架的测试已经覆盖通用部分，项目特有的行为要补测试。
 
+## 做每一页之前的放行顺序（DP1）
+文本分镜可以在 P1 就有。**开始写每一页的版式之前**，按这个顺序确认并写进 `handoff.md`，不要跳：
+
+1. 简报（`brief.yaml`：听众、时长、不能说的话）。
+2. 视觉方向和 styleframe（封面 + 最难的一页，截图，`self_selected` 或 `user_selected`）。
+3. 内容到动效的对应（`design/motion-map.yaml`：哪个主张用哪张配方卡，为什么）。
+4. 写了 `recipe` / `transition` 的完整 `storyboard.yaml`。`npm run lint:storyboard` 没有超限。
+
+配方卡在 `design/recipes/`（说明见技能的 `reference/09_motion_recipes.md`）。一种手法当主角只此一次；`overlap-handoff`、`word-mask`、`flood-theme` 是系统，可以重复。
+
 ## P5 · 全稿
+- 上面四步没有写进 handoff 之前，不要开这一阶段。
 - 每批 3–4 页，先做静态，再加动作。每批都要看总览图和至少一张原尺寸截图（`qa/preview/batch-N/`）。长文件分段写，写完一段检查再写下一段。
 - 从第一版全稿就跑布局检查（`08_layout_motion_qc.md`），不要等用户说挤了再量。挤的时候删句子或写入 `notes.js` 的 `moved`，不要缩小字号。
 - 素材全部进 `asset-manifest.yaml`。占位素材要在屏幕上标明身份；真实素材到位后，要同时改标签、`claims.yaml` 和讲稿（`04_content_integrity.md`）。照片用有授权的实拍，画面上要能看清。

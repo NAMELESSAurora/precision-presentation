@@ -226,6 +226,25 @@ test('layout checker flags a planted overlap and the sample final states are cle
   expect(planted.flags.some((f) => f.type === 'text-overlap')).toBe(true)
 })
 
+test('count-up recipe finishes on the printed text', async ({ page }) => {
+  await page.goto('/index.html#S02')
+  await ready(page)
+  const text = await page.evaluate(async () => {
+    const el = document.createElement('b')
+    el.textContent = '80%'
+    el.dataset.to = '80'
+    document.getElementById('S02').append(el)
+    const anim = window.DECK_RECIPES.enter['count-up'](el, 0, {
+      reduced: false,
+      animate: (node, frames, opts) => node.animate(frames, opts),
+    })
+    anim.finish()
+    await anim.finished
+    return el.textContent
+  })
+  expect(text).toBe('80%')
+})
+
 test('presenter window: opens with S, syncs, drives the deck; notes never load in the audience window', async ({ page, context }) => {
   await page.goto('/index.html#S02')
   await ready(page)

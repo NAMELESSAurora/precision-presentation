@@ -11,10 +11,12 @@ Run from the project directory. `npm test` and `npm run`, not bare `npx`. Set `P
 - [ ] `npm run qa:run -- qa/<round>/motion-run --gate` — 0 snaps, 0 pops
 - [ ] If exits are per element: `--overlap 150:250` and `npm run qa:handoff -- qa/<round>/handoff.json --gate`
 - [ ] `npm run qa:motion -- <round>` filmstrips looked at, not only generated
+- [ ] `npm run lint:storyboard` — no recipe over its catalog limit
 - [ ] `npm test`
 - [ ] Copy trimmed off a slide is in `notes.js` `moved` (`npm run qa:copy -- <old.html> index.html qa/copy-moved.md --notes src/js/notes.js --gate`)
 
 ## Before a package (P7)
+- [ ] `npm run qa:review-pack`, then a clean-context pass of `design/aesthetic-rules.md` written into `qa/final-review.md` with stills
 - [ ] The checks above, after the last edit
 - [ ] `npm run release` (runs `qa:gate` again, then notes, PDF, cold start, zip)
 - [ ] PDF pages looked at

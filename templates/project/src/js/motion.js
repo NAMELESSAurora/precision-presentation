@@ -46,6 +46,11 @@
   }
   function enterOne(el, delay) {
     if (reduced) return animate(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 160, delay: Math.min(delay, 120), easing: 'linear' })
+    const recipe = window.DECK_RECIPES && window.DECK_RECIPES.enter && window.DECK_RECIPES.enter[kindOf(el)]
+    if (recipe) {
+      const made = recipe(el, delay, { animate, reduced })
+      if (made) { inner(el, delay); return made }
+    }
     let a
     switch (kindOf(el)) {
       case 'rise':

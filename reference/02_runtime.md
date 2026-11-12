@@ -1,6 +1,6 @@
 # 02 · 运行时与脚手架
 
-`templates/project/` 是一套纯 HTML/CSS/JS 的演示工程：不用构建，classic script，能从 `file://` 运行。它由 Nostalgia on Repeat 的运行时去掉项目专用部分提炼而来，自带 16 项 Playwright 测试，外加讲稿差异的 `node --test`。用 `npm test`，不要裸跑 `npx`。
+`templates/project/` 是一套纯 HTML/CSS/JS 的演示工程：不用构建，classic script，能从 `file://` 运行。它由 Nostalgia on Repeat 的运行时去掉项目专用部分提炼而来，自带 17 项 Playwright 测试，外加讲稿差异和分镜配方次数的 `node --test`。用 `npm test`，不要裸跑 `npx`。
 
 ## 文件分工
 | 文件 | 负责 | 改不改 |

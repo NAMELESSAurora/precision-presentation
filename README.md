@@ -22,7 +22,10 @@ precision-presentation/
 │   ├── 05_qa.md             # 三轨 QA 命令、读法、问题分级
 │   ├── 06_delivery.md       # 打包、PDF、现场清单与故障表
 │   ├── 07_case_nostalgia.md # 案例决策日志 D01–D18
-│   └── 08_layout_motion_qc.md # 多分辨率布局门、动效逐帧、讲稿迁移、设计护栏
+│   ├── 08_layout_motion_qc.md # 多分辨率布局门、动效逐帧、讲稿迁移、设计护栏
+│   ├── 09_motion_recipes.md   # 动效配方卡（video-shotcraft → 按 Next 播放）
+│   ├── 10_aesthetic_rules.md  # 判例式准则 DR/DQ/DP
+│   └── 11_deck_final_review.md # 干净上下文的终检
 ├── templates/project/       # 已测好的通用工程脚手架（复制使用）
 └── tools/new-deck.mjs       # 新建项目
 ```

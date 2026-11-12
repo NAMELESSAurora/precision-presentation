@@ -1,0 +1,10 @@
+# Content → motion map. Write this after the visual direction is chosen and before the
+# full storyboard is locked (design/aesthetic-rules.md DP1). One starring recipe per row.
+# System moves (overlap-handoff, word-mask, flood-theme) are not starred here.
+# Names must exist in design/recipes/catalog.json. Limits are linted.
+moves: []
+#  - slide: S02
+#    step: 1
+#    claim: "the number the room must remember"
+#    recipe: count-up
+#    why: "the figure is the hero of this press; nothing else moves"

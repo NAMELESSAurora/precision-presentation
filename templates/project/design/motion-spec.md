@@ -19,6 +19,9 @@ moment; the final layout always exists in CSS without animation.
 | meter · type · load | digital surfaces only (stepped, add pixels only) | steps |
 | flood | world change | 420 ms |
 
+## Recipes
+Named moves live in `design/recipes/` (credit: video-shotcraft, Apache-2.0, rewritten for this runtime). Put the card id on the storyboard. `npm run lint:storyboard` enforces how often each card may star. `data-anim` values implemented in `src/js/recipes.js` run through the existing Next / reduced-motion / static rules. Transition cards are opt-in inside `transition()`.
+
 ## Project-specific motion
 (transitions, signature elements — what each one explains; delete it if the answer is only "it looks cool")
 
