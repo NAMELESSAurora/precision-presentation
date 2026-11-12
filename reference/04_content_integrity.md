@@ -24,6 +24,15 @@
 - **logo / 片名字形参考：** 只拿来对照，不放进成片；从 Wikimedia Commons 之类的公开来源取，并记录。
 - **视频重封装：** 去掉 tmcd 时间码轨（`-map 0:v:0 -map 0:a:0 -c copy -write_tmcd 0`），再用 md5 确认音视频流和原片逐包一致。
 
+## 从幻灯片上挪走的字
+页面为了留白缩短时，整句写入 `src/js/notes.js` 的 `moved`（数组）。演讲者窗口和生成的 `speaker-notes.md` 会标成 “Moved off the slide”。口语字数只数 `cues`，挪走的字不改变计时。
+
+主张、来源编号、署名不能消失：幻灯片上可以缩短，完整句子留在 `moved`，`[Rnn]` 要么仍在画面上，要么写进 `moved`。对照上一版 HTML：
+
+```bash
+node scripts/qa-copy-moved.mjs previous-index.html index.html qa/copy-moved.md --notes src/js/notes.js --gate
+```
+
 ## 第一人称内容
 - 只用讲者本人写的或确认过的句子。模板和空位标 `[待确认]`，永远不替讲者编经历、情绪或场景。
 - 讲者自己的作品里本来就有的话（例如 demo 献词“In memory of the movies I loved…”），可以引用，但要注明出处，并且允许讲者关掉（`content.js` 里的 text 设为 null）。

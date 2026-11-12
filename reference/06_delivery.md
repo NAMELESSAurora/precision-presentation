@@ -1,12 +1,16 @@
 # 06 · 交付、教室现场、计时
 
 ## 一条龙
-`npm run release` 依次执行：
-1. `build-notes`：由 notes.js 生成 speaker-notes.md；
+发布前先看测量（`08_layout_motion_qc.md`）：`npm run qa:gate` 必须过；动效用 `qa:run --gate`（手递手稿再加 `--overlap 150:250` 和 `qa:handoff --gate`）。全片录制很慢，不要塞进每一次小改，但交出去之前要有一轮全片。
+
+`npm run release` 会自己再跑一遍 `qa:gate`，然后依次：
+1. `build-notes`：由 notes.js 生成 speaker-notes.md（含 `moved`，口语字数只数 cues）；
 2. `export-pdf`：导出 `export/reading.pdf` 和每页预览；
 3. `build`：生成 `dist/`，包括 START-HERE、可选的 start-server.cmd、presenter-docs 和备用 PDF；
 4. `verify-dist release`：冷启动检查；
 5. `package`：生成 `release/`。
+
+最后一次改动之后再跑 release，对一下 zip 和 PDF 的时间戳。PDF 用 `pdftoppm` 打出来看每一页。
 
 产物：
 - `release/<package>/`：演示文件夹，就是 dist 的副本；

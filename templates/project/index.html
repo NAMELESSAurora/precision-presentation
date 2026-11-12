@@ -24,12 +24,12 @@
       <img class="poster" src="assets/img/sample-poster.jpg" alt="Poster frame of the opening video">
       <video preload="none" playsinline></video>
     </div>
-    <div class="cover over-media">
+    <div class="cover over-media" data-over>
       <h1><span class="line" data-reveal="1">Presentation</span><span class="line" data-reveal="1"><em>Title</em></span></h1>
       <div class="sub" data-reveal="1" data-anim="rise">A subtitle that states the question</div>
     </div>
-    <div class="credits">
-      <div class="credit-text over-media">
+    <div class="credits" data-over>
+      <div class="credit-text over-media" data-tight>
         <div class="label">Opening video · maker / source credit</div>
         <div class="song">Artist — <span class="work">Work Title</span></div>
       </div>
@@ -48,8 +48,8 @@
   <!-- S02 · Claim: two blocks meeting on one line -->
   <section class="slide" id="S02" data-label="Question &amp; claim">
     <h2 class="title"><span class="line">What is the question?</span></h2>
-    <div class="pair" style="left:96px" data-reveal="1"><div class="label" data-type-on>Part one</div><h3>First idea</h3><p>what it does.</p></div>
-    <div class="pair" style="left:1056px" data-reveal="2"><div class="label" data-type-on>Part two</div><h3>Second idea</h3><p>what it points to.</p></div>
+    <div class="pair" style="left:96px" data-reveal="1" data-tight><div class="label" data-type-on>Part one</div><h3>First idea</h3><p>what it does.</p></div>
+    <div class="pair" style="left:1056px" data-reveal="2" data-tight><div class="label" data-type-on>Part two</div><h3>Second idea</h3><p>what it points to.</p></div>
     <svg class="lines" viewBox="0 0 1920 1080" aria-hidden="true">
       <path class="ln" data-reveal="1" data-anim="draw" d="M96 760 H864"/>
       <path class="ln" data-reveal="2" data-anim="draw" d="M1824 760 H1056"/>
@@ -71,15 +71,15 @@
         <g class="ln-ink"><path data-reveal="2" data-anim="draw" d="M300 200 V120"/><path data-reveal="2" data-anim="draw" data-delay="120" d="M700 380 H800"/></g>
         <g class="ring-ink"><circle data-reveal="2" cx="300" cy="210" r="10"/><circle data-reveal="2" data-delay="120" cx="690" cy="380" r="10"/></g>
       </svg>
-      <div class="callout" style="left:200px;top:84px" data-reveal="2" data-delay="80">a fact about the image</div>
-      <div class="callout" style="left:800px;top:362px" data-reveal="2" data-delay="200">another fact</div>
+      <div class="callout" style="left:200px;top:84px" data-reveal="2" data-delay="80" data-over>a fact about the image</div>
+      <div class="callout" style="left:800px;top:362px" data-reveal="2" data-delay="200" data-over>another fact</div>
     </figure>
     <div class="caption label" data-slot-box="PLATE"><span class="tag tag-made"><i></i>Made here · say what the image is and when it was made</span></div>
     <p class="plate-missing" data-slot-fallback="PLATE">Image not supplied yet — content.js → slots.PLATE</p>
     <div class="qs">
-      <div class="q" data-reveal="1"><div class="label">01 · Sound</div><p>What do I hear?</p></div>
-      <div class="q" data-reveal="2"><div class="label">02 · Image</div><p>What is shown?</p></div>
-      <div class="q" data-reveal="3"><div class="label">03 · Context</div><p>What am I invited to imagine?</p></div>
+      <div class="q" data-reveal="1" data-tight><div class="label">01 · Sound</div><p>What do I hear?</p></div>
+      <div class="q" data-reveal="2" data-tight><div class="label">02 · Image</div><p>What is shown?</p></div>
+      <div class="q" data-reveal="3" data-tight><div class="label">03 · Context</div><p>What am I invited to imagine?</p></div>
     </div>
   </section>
 
@@ -103,12 +103,12 @@
     <h2 class="statement"><span class="line">The answer,</span><span class="line"><em>in one sentence.</em></span></h2>
     <div class="frame window"><img src="assets/img/sample-poster.jpg" alt="The opening still, framed"></div>
     <div class="asks">
-      <div class="ask" data-reveal="1"><span class="label">01</span>What am I feeling?</div>
-      <div class="ask" data-reveal="2"><span class="label">02</span>What has been selected?</div>
-      <div class="ask" data-reveal="3"><span class="label">03</span>What do I make of it now?</div>
+      <div class="ask" data-reveal="1" data-tight><span class="label">01</span>What am I feeling?</div>
+      <div class="ask" data-reveal="2" data-tight><span class="label">02</span>What has been selected?</div>
+      <div class="ask" data-reveal="3" data-tight><span class="label">03</span>What do I make of it now?</div>
     </div>
     <p class="personal" data-reveal="4" data-text="personal" data-format="“{}”"></p>
-    <div class="discuss" data-reveal="5"><div class="label">Discussion</div><p>An open question for the room?</p></div>
+    <div class="discuss" data-reveal="5" data-tight><div class="label">Discussion</div><p>An open question for the room?</p></div>
   </section>
 
   <!-- S06 · References (not counted, not read aloud) -->

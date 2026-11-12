@@ -1,6 +1,6 @@
 # 02 · 运行时与脚手架
 
-`templates/project/` 是一套纯 HTML/CSS/JS 的演示工程：不用构建，classic script，能从 `file://` 运行。它由 Nostalgia on Repeat 的运行时去掉项目专用部分提炼而来，自带 14 项 Playwright 测试。
+`templates/project/` 是一套纯 HTML/CSS/JS 的演示工程：不用构建，classic script，能从 `file://` 运行。它由 Nostalgia on Repeat 的运行时去掉项目专用部分提炼而来，自带 16 项 Playwright 测试，外加讲稿差异的 `node --test`。用 `npm test`，不要裸跑 `npx`。
 
 ## 文件分工
 | 文件 | 负责 | 改不改 |
@@ -19,8 +19,9 @@
 ## 标记约定
 - **幻灯片：**
   - 结构：`<section class="slide" id="S03" data-theme="day|night" data-label="…" [data-ref]>`。
-  - `data-ref`：参考文献页，不计入页码，不朗读，阅读版里显示为 “References”。
-  - 页眉（`S03 · label` 和 `03 / 05`）由运行时生成，不要手写。
+  - `data-ref`：参考文献页，不计入页码，不朗读。现场页脚是 “Not read aloud”，阅读版是 “References”。正文页脚是 `01 / 05` 这种，分母只算没有 `data-ref` 的页。如果参考文献会投出来，去掉 `data-ref`，让每一页都进分母，并加一条测试钉死页脚文字。不要出现“幻灯片有 17 页、页脚写 /16”。
+  - 页眉（`S03 · label` 和 `03 / 05`）由运行时生成，不要手写。页眉是家具：布局检查允许它更靠近边缘。
+- **布局声明（检查器认，运行时不改变排版）：** `data-over` 字压在图上、`data-under` 垫在字下的色块、`data-tight` 标签和值的一组、`data-bleed` / `data-edge` 故意出血。每一处写进 `qa/layout-exceptions.md`。见 `08_layout_motion_qc.md`。
 - **步骤：**
   - `[data-reveal=k]` 在第 k 步出现，0 表示入场时出现。隐藏时用 visibility 占位，所以版面不会跳。
   - 页内的步骤数 = 用到的不同 k 值的个数 + 1。可选元素被移除后，运行时会把步骤重新编号，不会出现“按了一下什么也没出来”。
@@ -50,7 +51,7 @@
 
 ## 演讲者窗口
 - 讲者按 S 用 `window.open` 打开它，靠 `postMessage` 和 opener 通信，所以在 `file://` 下也能用。通过 http 打开时，另外用 `BroadcastChannel('deck-<package>')` 通信。
-- 窗口显示：当前步的备注（高亮）、下一页预览、计时器（T 开始 / 暂停，R 归零）、按每页计划秒数算出的超前或落后，并且可以点选跳页。
+- 窗口显示：当前步的备注（高亮）、下一页预览、计时器（T 开始 / 暂停，R 归零）、按每页计划秒数算出的超前或落后，并且可以点选跳页。`notes.js` 里的 `moved` 会显示为 “Moved off the slide”（从幻灯片上挪走的句子，不计入口语字数）。
 - 备注**只**在 `presenter.html` 里加载；测试会确认观众窗口里没有 `DECK_NOTES`。
 
 ## 静态模式与 PDF

@@ -21,7 +21,9 @@ Last update: YYYY-MM-DD — (one line: what changed). Read order for a new sessi
 1.
 
 ## Environment notes
-- Playwright browser: `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=…` (if the download fails)
+- Playwright is pinned. Use `npm test` and `npm run qa:*`, not bare `npx`.
+- Browser: `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=…` when the download fails (system Chrome is fine).
+- A full 60fps `qa:run` is slow. Evidence is a full run; `--only` is a look.
 
 ## Last commands run
 

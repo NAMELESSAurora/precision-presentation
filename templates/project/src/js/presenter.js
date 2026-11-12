@@ -56,6 +56,7 @@
       <p class="goal">${n.seconds ? n.seconds + ' s' : 'not read aloud'}${n.optional ? ' · skippable on the short path' : ''} — ${esc(n.goal || '')}</p>
       <ol>${cues}</ol>
       ${n.bridge ? `<div class="bridge">→ ${esc(n.bridge)}</div>` : ''}
+      ${Array.isArray(n.moved) && n.moved.length ? `<div class="meta"><b>Moved off the slide</b><br>${n.moved.map((line) => esc(line)).join('<br>')}</div>` : ''}
       <div class="meta"><b>Sources</b> ${esc(n.sources || '')}<br><b>Limits</b> ${esc(n.limits || '')}</div>`
     const cur = $('notes').querySelector('li.now')
     if (cur) cur.scrollIntoView({ block: 'nearest' })

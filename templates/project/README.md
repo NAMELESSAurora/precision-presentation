@@ -9,7 +9,9 @@ HTML presentation (precision-presentation scaffold). N body slides + references,
 | Present via local server (optional, needs Node.js) | `npm start` → http://127.0.0.1:4173/index.html · in the package: `start-server.cmd` | |
 | Reading version / submission PDF | `index.html?mode=static` · `release/<name>_Presentation.pdf` | |
 | Full release | `npm run release` | |
-| Tests | `npx playwright test` | |
+| Tests | `npm test` (pinned Playwright; not bare npx) | |
+| Layout / type gate | `npm run qa:gate` | |
+| Motion frames | `npm run qa:run -- qa/motion-run --gate` | |
 
 ## Keys (audience window)
 `→ Space PgDn click` next (finishes a running animation first; during a video one press warns, a second stops it) ·

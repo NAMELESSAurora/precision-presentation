@@ -21,7 +21,8 @@ precision-presentation/
 │   ├── 04_content_integrity.md # 事实 / 来源 / 素材账本、标签、讲稿核对
 │   ├── 05_qa.md             # 三轨 QA 命令、读法、问题分级
 │   ├── 06_delivery.md       # 打包、PDF、现场清单与故障表
-│   └── 07_case_nostalgia.md # 案例决策日志 D01–D18
+│   ├── 07_case_nostalgia.md # 案例决策日志 D01–D18
+│   └── 08_layout_motion_qc.md # 多分辨率布局门、动效逐帧、讲稿迁移、设计护栏
 ├── templates/project/       # 已测好的通用工程脚手架（复制使用）
 └── tools/new-deck.mjs       # 新建项目
 ```
@@ -30,7 +31,7 @@ precision-presentation/
 
 ```bash
 node <skill>/tools/new-deck.mjs <项目目录> --title "标题" --package Short_Name
-cd <项目目录> && npm install && npx playwright test
+cd <项目目录> && npm install && npm test
 ```
 
 主交付是浏览器里的 HTML 演示：双击 `index.html` 就能离线放映。PPTX 只在明确要求时制作。

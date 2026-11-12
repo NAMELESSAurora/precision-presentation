@@ -3,6 +3,7 @@
 import { test, expect } from '@playwright/test'
 import { pathToFileURL } from 'node:url'
 import { resolve } from 'node:path'
+import { checkLayout } from '../scripts/lib/layout-check.mjs'
 
 const ready = (page) => page.evaluate(() => deck.ready())
 const state = (page) => page.evaluate(() => deck.state())
@@ -191,6 +192,38 @@ test('runs from file:// without a server', async ({ page }) => {
   await settle(page)
   expect(await state(page)).toMatchObject({ slide: 'S01', step: 1 })
   expect(errors).toEqual([])
+})
+
+test('folio counts body slides; a data-ref slide is labelled and not given a number', async ({ page }) => {
+  await page.goto('/index.html?mode=static')
+  await ready(page)
+  await expect(page.locator('#S01 .head .cnt')).toHaveText('01 / 05')
+  await expect(page.locator('#S06 .head .cnt')).toHaveText('References')
+  await page.goto('/index.html#S06')
+  await ready(page)
+  await expect(page.locator('#S06 .head .cnt')).toHaveText('Not read aloud')
+})
+
+test('layout checker flags a planted overlap and the sample final states are clean', async ({ page }) => {
+  await page.goto('/index.html?mode=static')
+  await ready(page)
+  const ids = await page.evaluate(() => [...document.querySelectorAll('section.slide')].map((s) => s.id))
+  for (const id of ids) {
+    const r = await page.evaluate(checkLayout, { slideEl: '#' + id })
+    expect(r.flags, `${id} ${JSON.stringify(r.flags)}`).toEqual([])
+  }
+  await page.evaluate(() => {
+    const s = document.getElementById('S02')
+    const a = document.createElement('p')
+    a.textContent = 'Planted overlap alpha'
+    a.style.cssText = 'position:absolute;left:400px;top:500px;font-size:40px;margin:0'
+    const b = document.createElement('p')
+    b.textContent = 'Planted overlap beta'
+    b.style.cssText = 'position:absolute;left:420px;top:510px;font-size:40px;margin:0'
+    s.append(a, b)
+  })
+  const planted = await page.evaluate(checkLayout, { slideEl: '#S02' })
+  expect(planted.flags.some((f) => f.type === 'text-overlap')).toBe(true)
 })
 
 test('presenter window: opens with S, syncs, drives the deck; notes never load in the audience window', async ({ page, context }) => {

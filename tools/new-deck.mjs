@@ -34,4 +34,4 @@ if (mods) {
   console.log(`linked node_modules → ${resolve(mods)}`)
 }
 console.log(`created ${dst}`)
-console.log('next: cd there; npm install (unless linked); npx playwright test; then fill brief.yaml (P0) and follow the skill.')
+console.log('next: cd there; npm install (unless linked); npm test; then fill brief.yaml (P0) and follow the skill.')
