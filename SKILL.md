@@ -1,6 +1,6 @@
 ---
 name: precision-presentation
-description: 精致演出型网页演示文稿（HTML/CSS/JS，无构建步骤）的全流程工作流 + 可直接复制的通用脚手架。用于课堂 / 汇报 / 答辩 / 讲座演示：论证与分镜、事实与来源账本、艺术方向与设计系统、逐步揭示与动效、开场视频 / 音频嵌入、演讲者窗口与讲稿、三轨 QA（静态 / 动态 / 现场可靠性）、离线打包、提交用 PDF、讲稿大纲与外部讲稿核对、教室电脑故障排查。源自 Nostalgia on Repeat（2026-10）的完整制作，执行用户的 precision-presentation 规范 v1.0。
+description: 精致演出型网页演示文稿（HTML/CSS/JS，无构建步骤）的全流程工作流 + 可直接复制的通用脚手架。用于课堂 / 汇报 / 答辩 / 讲座演示：论证与分镜、事实与来源账本、艺术方向与设计系统、逐步揭示与动效、开场视频 / 音频嵌入、演讲者窗口与讲稿、三轨 QA（静态 / 动态 / 现场可靠性）、16:9 多分辨率布局测量、逐帧动效与手递手检查、离线打包、提交用 PDF、讲稿大纲与外部讲稿核对、教室电脑故障排查。源自 Nostalgia on Repeat（2026-10）的完整制作，执行用户的 precision-presentation 规范 v1.0。
 ---
 
 # Precision Presentation — 可复用工作流
@@ -18,7 +18,7 @@ description: 精致演出型网页演示文稿（HTML/CSS/JS，无构建步骤�
 ## 快速开始
 1. **新建项目：** `node <skill>/tools/new-deck.mjs <项目目录> --title "标题" --package Short_Name [--link-modules <已有 node_modules>]`，会把 `templates/project/` 复制过去，并写入标题。
 2. **安装依赖：** 在项目目录运行 `npm install`（只装 `@playwright/test`）。离线时用 `--link-modules` 链接一份现成的。Playwright 自带的浏览器下载失败时，设置 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` 指向本机已有的 chromium 或 chrome.exe。
-3. **确认脚手架能跑：** `npx playwright test`，14 项应全部通过。
+3. **确认脚手架能跑：** `npm test`（不要裸跑 `npx`），17 项 Playwright 测试和配方/讲稿的单元测试应全部通过。浏览器下不来时设置 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`。
 4. **按 P0→P7 推进**（见下）。每次改动后跑一遍对应的 QA，交付前跑 `npm run release`。
 
 ## 总流程（质量门细则见 `reference/01_workflow.md`）
@@ -29,8 +29,9 @@ description: 精致演出型网页演示文稿（HTML/CSS/JS，无构建步骤�
 | P2 艺术方向 | 有参考就忠实提炼；没有参考才做 2–3 个方向，用**封面 + 最难的内容页**比较 | `design/selection.md` 和样稿截图 | 复杂内页也成立；记为 self_selected |
 | P3 设计系统 | 角色色 token、字号网格、页型、动作语法 | `design/design-system.md` `motion-spec.md` `tokens.css` | 规则具体到另一个 Agent 也能执行 |
 | P4 原型 | 三页端到端：复杂页、关系页、媒体页 | 可操作原型和测试 | 能进、能退、能停、能恢复、能跳过 |
+| 放行 | 简报 → styleframe → 内容/动效对应 → 带配方名的分镜 | `brief.yaml`、`design/motion-map.yaml`、`storyboard.yaml` | 写进 `handoff.md` 之后才做每一页 |
 | P5 全稿 | 每批 3–4 页，先静后动；素材进账本 | 全稿、`asset-manifest.yaml`、备注 | 没有未标注的占位 |
-| P6 三轨 QA | 静态截图 / 动态胶片条 / 媒体 / 冷启动；问题分 P0–P3 | `qa/<round>/`、`qa/qa-report.md` | 没有 P0/P1；至少两轮真实审查 |
+| P6 三轨 QA | 静态截图 / 布局测量 / 逐帧动效 / 媒体 / 冷启动；问题分 P0–P3 | `qa/<round>/`、`qa/qa-report.md` | 没有 P0/P1；`qa:gate` 为 0；至少两轮真实审查 |
 | P7 交付 | 排练计时、短路线、打包、提交 PDF、交接 | `release/`、`run-of-show.md`、`handoff.md` | 解压后冷启动通过；每项状态都可核验 |
 
 ## 硬规则（换项目默认遵守）
@@ -64,7 +65,7 @@ description: 精致演出型网页演示文稿（HTML/CSS/JS，无构建步骤�
 - **API：** `window.deck` 提供 `next prev goto finish state ready setMotion`。测试和演讲者窗口都只走这个接口。
 
 ## 命令速查（在项目目录）
-`npx playwright test` · `node scripts/qa-shots.mjs <round>` · `node scripts/qa-motion.mjs <round> [--from S03 --to S05]` · `node scripts/qa-media.mjs <round>` · `node scripts/build-notes.mjs` · `node scripts/export-pdf.mjs` · `node scripts/build.mjs` · `node scripts/verify-dist.mjs <round> [--root 目录]` · `node scripts/package.mjs` · 一条龙：`npm run release`。
+`npm test` · `npm run qa:gate`（布局四尺寸 + 终态 + 中段 + 字号 + 设计护栏）· `npm run qa:shots -- <round>` · `npm run qa:motion -- <round>` · `npm run qa:run -- <目录> [--gate]` · `npm run qa:handoff -- <out.json>` · `npm run qa:media -- <round>` · `npm run notes` · `npm run export:pdf` · `npm run release`（先 qa:gate，再讲稿、PDF、打包）。测量门槛和手递手标准见 `reference/08_layout_motion_qc.md`。
 
 ## 文件
 - `reference/00_spec_precision-presentation_v1.md`：用户的规范原文（权威）。
@@ -75,5 +76,9 @@ description: 精致演出型网页演示文稿（HTML/CSS/JS，无构建步骤�
 - `reference/05_qa.md`：三轨 QA 的命令、读法、问题分级、评分、预期噪音、回归范围。
 - `reference/06_delivery.md`：打包、提交 PDF、教室现场清单与故障表、计时与短路线、交接。
 - `reference/07_case_nostalgia.md`：Nostalgia on Repeat 的决策日志 D01–D18、用户反馈与教训。
+- `reference/08_layout_motion_qc.md`：多分辨率布局门、挪进讲稿的字、逐帧动效、审看批次、设计护栏、环境坑。
+- `reference/09_motion_recipes.md`：动效配方卡（video-shotcraft 的思路，改成按 Next 播放）。卡在 `templates/project/design/recipes/`。
+- `reference/10_aesthetic_rules.md`：判例式准则 DR/DQ/DP，全文在脚手架 `design/aesthetic-rules.md`。
+- `reference/11_deck_final_review.md`：干净上下文的终检。`npm run qa:review-pack` 只列问题和证据，不代填通过。
 - `templates/project/`：脚手架（复制使用；不要在 skill 目录里直接做项目）。
 - `tools/new-deck.mjs`：新建项目。

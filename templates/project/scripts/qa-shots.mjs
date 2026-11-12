@@ -34,7 +34,8 @@ const CHECK = () => {
   const name = (el) => `${el.tagName.toLowerCase()}.${[...el.classList].join('.')}:"${el.textContent.trim().slice(0, 40)}"`
   const issues = []
   const boxes = els.map((el) => ({ el, b: box(el) }))
-  for (const { el, b } of boxes) if (b.l < -1 || b.t < -1 || b.r > 1921 || b.b > 1081) issues.push({ type: 'out-of-stage', el: name(el), box: b })
+  // Second opinion beside scripts/qa-layout.mjs (ink). Bleed / edge are declared, not bugs.
+  for (const { el, b } of boxes) if ((b.l < -1 || b.t < -1 || b.r > 1921 || b.b > 1081) && !el.closest('[data-bleed], [data-edge]')) issues.push({ type: 'out-of-stage', el: name(el), box: b })
   for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
     const A = boxes[i], B = boxes[j]
     if (A.el.contains(B.el) || B.el.contains(A.el)) continue

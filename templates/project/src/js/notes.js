@@ -1,7 +1,11 @@
 /* Speaker notes. Loaded ONLY by presenter.html, never by the audience deck.
  * speaker-notes.md is generated from this file (node scripts/build-notes.mjs) — edit here, not there.
  * cues[k] = what to say when step k appears. Mark anything the presenter must confirm with [待确认] / [TO CONFIRM];
- * never put invented personal experience, quotes or numbers here. */
+ * never put invented personal experience, quotes or numbers here.
+ * moved: optional string[]. Copy taken off the slide to make room. Shown in the presenter window and in
+ * speaker-notes.md as "Moved off the slide". Not part of the spoken word count (cues only). Do not drop a
+ * claim, source tag or credit — shorten it on the slide and keep the full line here.
+ *   moved: ['Full sentence that used to be on the slide, with its [R01] tag.'] */
 window.DECK_NOTES = {
   S01: {
     seconds: 45,

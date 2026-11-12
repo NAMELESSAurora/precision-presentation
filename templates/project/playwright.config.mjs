@@ -2,6 +2,7 @@ import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
   testDir: './tests',
+  testMatch: '**/*.spec.mjs',
   fullyParallel: false,
   workers: 1,
   reporter: [['list'], ['json', { outputFile: 'qa/test-results.json' }]],

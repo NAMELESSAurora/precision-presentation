@@ -4,6 +4,8 @@
  * reference/02_runtime.md). Markup contract:
  *   section.slide#Sxx [data-theme="night|day"] [data-label] [data-ref]   data-ref = not counted / not read aloud
  *   [data-reveal="k"] shown from step k (0 = on entry) · [data-anim] motion kind · [data-delay] ms
+ *   Layout opt-outs (qa-layout, see qa/layout-exceptions.md): data-over, data-under, data-tight,
+ *   data-bleed, data-edge. Running head (.head) is furniture. data-ref is not numbered.
  *   .media[data-media=ID] > img.poster + video, controls [data-act=play|restart|mute|skip] in the same slide
  *   button[data-audio=ID] one clip at a time · [data-slot-box=ID] > img[data-slot=ID] · [data-slot-fallback=ID]
  *   [data-text=key] optional line from DECK_CONTENT.text · [data-fn-of=selector] shows that image's file name */

@@ -16,11 +16,11 @@
 #S02 .meet { position: absolute; left: var(--margin); width: 1728px; top: 800px; text-align: center; font-size: 56px; }
 
 /* S03 · Close reading */
-#S03 .plate { left: var(--margin); top: 342px; width: 1056px; height: 594px; }
+#S03 .plate { left: var(--margin); top: 352px; width: 1056px; height: 594px; }
 #S03 .caption { position: absolute; left: var(--margin); top: 958px; width: 1056px; }
 #S03 .plate-missing { position: absolute; left: var(--margin); top: 342px; width: 1056px; height: 594px; display: grid; place-items: center;
   border: 2px dashed var(--c-line); font: 400 var(--fs-label)/1.3 var(--mono); color: var(--c-meta); }
-#S03 .qs { position: absolute; left: 1248px; top: 334px; width: 576px; }
+#S03 .qs { position: absolute; left: 1248px; top: 344px; width: 576px; }
 #S03 .q { border-top: 2px solid var(--c-line); padding: 20px 0 30px; }
 #S03 .q p { margin-top: 10px; font-size: var(--fs-body); line-height: 1.14; }
 #S03[data-step="1"] .q:nth-child(1), #S03[data-step="2"] .q:nth-child(2), #S03[data-step="3"] .q:nth-child(3) { border-top-color: var(--c-accent); }
@@ -37,7 +37,7 @@
 #S05 .statement em { font-style: italic; font-weight: 300; color: var(--c-em); }
 #S05 .frame { left: 960px; top: 150px; width: 864px; height: 486px; }
 #S05 .asks { position: absolute; left: 960px; top: 700px; width: 864px; }
-#S05 .ask { display: flex; gap: 22px; align-items: baseline; padding: 10px 0; font-size: 42px; }
+#S05 .ask { display: flex; gap: 22px; align-items: baseline; padding: 14px 0; font-size: 42px; }
 #S05 .personal { position: absolute; left: var(--margin); top: 560px; width: 780px; font-size: 38px; line-height: 1.25; font-style: italic; }
 #S05 .discuss { position: absolute; left: var(--margin); top: 790px; width: 780px; }
 #S05 .discuss p { margin-top: 12px; font-size: 40px; line-height: 1.2; font-style: italic; }

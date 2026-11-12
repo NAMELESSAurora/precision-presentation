@@ -2,7 +2,9 @@
  * Logical canvas 1920×1080. Two "worlds" with role tokens: night (immersion: opening, media, conclusion) and day
  * (examining: argument pages). Components never use hex values: they read --c-* (deck.css), which the world sets.
  * Alternative palettes: add a :root[data-palette="name"] block and open index.html?palette=name.
- * Replace these values with the project's chosen direction (P2/P3); keep the role names. */
+ * Replace these values with the project's chosen direction (P2/P3); keep the role names.
+ * These placeholders put an orange day accent next to a blue night accent. That pair reads as a
+ * template — qa-design warns until a real direction replaces it. Do not ship both. */
 :root {
   --night-bg: #14121F;
   --night-wash: radial-gradient(1600px 700px at 50% 120%, rgba(120, 140, 255, .16), transparent 70%);

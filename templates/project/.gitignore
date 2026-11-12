@@ -1,5 +1,9 @@
 node_modules/
 qa/test-artifacts/
 qa/test-results.json
+qa/layout-*.json
+qa/type-census.json
+qa/handoff.json
+qa/motion-run/
 dist/
 release/

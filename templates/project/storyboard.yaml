@@ -1,5 +1,12 @@
-# Storyboard (P1). On-screen text is the content baseline; steps = one speaker click each (step 0 = on entry).
+# Storyboard. On-screen text is the content baseline; steps = one speaker click each (step 0 = on entry).
 # pace: pulse | explain | pause | climax
+# Before per-slide build (DP1): brief, then styleframes, then design/motion-map.yaml, then this file
+# with recipe names. Optional keys, linted against design/recipes/catalog.json:
+#   transition: overlap-handoff     # system hand-off may repeat
+#   steps:
+#     - text: "click 1: the figure"
+#       recipe: count-up            # starring recipes are limited; see each card
+# A string step ("click 1: …") is still valid and simply names no recipe.
 argument_summary: >
   (≤ 200 words: the whole argument in plain text; it must hold without any picture)
 
